@@ -23,9 +23,3 @@ class Person
     end
   end
 end
-
-obj = Person.new("David", 19, false)
-
-p obj.can_use_services?
-
-p obj
