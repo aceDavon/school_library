@@ -1,56 +1,39 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# Project Name
+# School Library
 
-> Description the project.
-
+> This is an Educational project for the Microverse Module 3 Block 4(Ruby) School library exercise, requirement for the Ruby Module
 
 ## Built With
 
-- Major languages
-- Frameworks
-- Technologies used
+- Ruby
 
-## Live Demo (if available)
+## Pre-requisites
 
-[Live Demo Link](https://livedemo.com)
+- You need to have Ruby installed on your local machine
+- Ruby bundler properly set up for installing dependencies
 
+  > **Go here to get Ruby installer for windows** > [Windows Installer](https://rubyinstaller.org/)
 
-## Getting Started
+  > **Go here to get Ruby installer for Linux** > [Linux Installer](https://www.ruby-lang.org/en/documentation/installation/)
 
-**This is an example of how you may give instructions on setting up your project locally.**
-**Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.**
+  > **Go here to get Ruby installer for MacOS** > [MacOS Installer](https://www.ruby-lang.org/en/documentation/installation/)
 
+## Setup
 
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-### Setup
-
-### Install
-
-### Usage
-
-### Run tests
-
-### Deployment
-
-
+- Git clone `https://github.com/aceDavon/school_library.git`
+- cd `school_library`
+- run `bundle install`
+- run `rubocop .` to check for linters
+- run `ruby list.rb` to run program
 
 ## Authors
 
-👤 **Author1**
+👤 **Makoji David**
 
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
-
-👤 **Author2**
-
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
+- GitHub: [@acedavon](https://github.com/acedavon)
+- Twitter: [@sharkleshevon](https://twitter.com/sharkleshevon)
+- LinkedIn: [Makoji David](https://linkedin.com/in/makoji-david)
 
 ## 🤝 Contributing
 
@@ -65,11 +48,8 @@ Give a ⭐️ if you like this project!
 ## Acknowledgments
 
 - Hat tip to anyone whose code was used
-- Inspiration
-- etc
+- Microverse community
 
 ## 📝 License
 
 This project is [MIT](./LICENSE) licensed.
-
-_NOTE: we recommend using the [MIT license](https://choosealicense.com/licenses/mit/) - you can set it up quickly by [using templates available on GitHub](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository). You can also use [any other license](https://choosealicense.com/licenses/) if you wish._
