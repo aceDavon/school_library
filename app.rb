@@ -22,7 +22,7 @@ class App
     if @people.empty?
       puts "There are no persons created yet, Add users to see them here :( \n\n"
     else
-      @people.each { |peeps| puts "\n Name: #{peeps.age}, #{peeps.name} years old \n\n" }
+      @people.each { |peeps| puts "\n Name: #{peeps.name}, Age: #{peeps.age} years old \n\n" }
     end
   end
 
