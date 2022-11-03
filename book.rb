@@ -11,4 +11,8 @@ class Book
   def add_rental(rental)
     @rental.push(rental)
   end
+
+  def books_list
+    self
+  end
 end
