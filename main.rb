@@ -21,7 +21,7 @@ class Main
 
   def request(selection)
     case selection
-    when 1
+    when '1'
       @inst.all_books
       init
     when '2'
