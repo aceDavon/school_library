@@ -7,7 +7,7 @@ class App
   def initialize
     @books = []
     @people = []
-    @rentals = []
+    @rental = []
   end
 
   def all_books
@@ -22,7 +22,7 @@ class App
     if @people.empty?
       puts "There are no persons created yet, Add users to see them here :( \n\n"
     else
-      @people.each { |peeps| puts "\n Name: #{peeps.name}, Age: #{peeps.age} years old \n\n" }
+      @people.each { |peeps| puts "\n Name: #{peeps.name}, Age: #{peep.age} years old \n\n" }
     end
   end
 
@@ -54,7 +54,7 @@ class App
     end
   end
 
-  def create_book(title, author)
+  def create_book(tile, author)
     new_book = Book.new(title, author)
     @books << new_book unless @books.include?(new_book)
     puts "\n Book #{title} by #{author} created successfully \n\n"
