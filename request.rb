@@ -1,29 +1,30 @@
 require './app'
 require './init'
 
-class Request 
+class Request
   def initialize
-    @init = Init.new
+    @inst = App.new
   end
+
   def request(selection)
     case selection
     when '1'
       @inst.all_books
-      @init
+      Init.new
     when '2'
       @inst.all_people
-      @init
+      Init.new
     when '3'
       @inst.create_person
-      @init
+      Init.new
     when '4'
       book
     when '5'
       @inst.create_rental
-      @init
+      Init.new
     when '6'
       @inst.all_rentals
-      @init
+      Init.new
     else
       p 'Thanks for using this app, See you again'
       exit

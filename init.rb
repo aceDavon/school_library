@@ -1,13 +1,15 @@
 require './request'
-require './main'
-require './request'
-
 class Init
   def initialize
-    @req = Request.new
-  end
-  def init
+    ['Please choose an option by entering a number',
+     '1 - List all books.', '2 - List all people.',
+     '3 - Create a person(1 - teacher or 2 - student).',
+     '4 - Create a book.', '5 - Create a rental.',
+     '6 - List all rentals for a given person id.',
+     '7 - Exit'].each do |opt|
+      puts opt
+    end
     req = gets.chomp
-    @req.request(req)
+    Request.new.request(req)
   end
 end
