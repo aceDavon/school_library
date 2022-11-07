@@ -1,7 +1,7 @@
 require './app'
 # require './init'
 
-module Request 
+module Request
   def initialize
     @inst = App.new
   end
@@ -15,10 +15,10 @@ module Request
       start
     when '2'
       @inst.all_people
-     start
+      start
     when '3'
       @inst.create_person
-     start
+      start
     when '4'
       book
     when '5'
@@ -31,5 +31,14 @@ module Request
       p 'Thanks for using this app, See you again'
       exit
     end
+  end
+
+  def book
+    p 'Enter title: '
+    title = gets.chomp
+    p 'Enter Author: '
+    author = gets.chomp
+    @inst.create_book(title, author)
+    start
   end
 end
