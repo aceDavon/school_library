@@ -29,7 +29,9 @@ class App
     if @people.empty?
       puts "There are no persons created yet, Add users to see them here :( \n\n"
     else
-      @people.each { |peeps| puts "\n Name: #{peeps['name']}, Age: #{peeps['age']} years old \n\n" }
+      @people.each do |peeps|
+        puts "\n [#{peeps['type']}]: Name: #{peeps['name']}, Age: #{peeps['age']} years old specialized in #{peeps['specialization']} \n\n"
+      end
     end
   end
 
@@ -49,7 +51,9 @@ class App
         id: new_person.id,
         type: new_person.class,
         name: new_person.name,
-        age: new_person.age
+        age: new_person.age,
+        rentals: new_person.rentals,
+        specialization: new_person.specialization
       }
       puts "\n User #{name} added successfully \n\n"
       save_people(@people)
@@ -105,12 +109,14 @@ class App
     puts @books[index - 1]
     date = gets.chomp
     new_rental = Rental.new(date, @books[index - 1], @people[person - 1])
+    arr = []
     @rentals << {
       date: new_rental.date,
       person_id: new_rental.person['id'],
       person_name: new_rental.person['name'],
       title: new_rental.book['title'],
-      author: new_rental.book['author']
+      author: new_rental.book['author'],
+      rentals: arr << new_rental.person['rentals']
     }
     puts "\n Rental Created successfully \n\n"
     save_rentals(@rentals)

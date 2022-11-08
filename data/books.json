@@ -1,1 +1,10 @@
-[{"title":"fire","author":"nati", "rental": []}]
+[
+  {
+    "title": "Lord of the Rings",
+    "author": "Martins G"
+  },
+  {
+    "title": "Lord of the Flies",
+    "author": "Odeegard"
+  }
+]
