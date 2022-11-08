@@ -30,5 +30,4 @@ module Loaddata
       File.write('./data/rentals.json', [])
     end
   end
-  
 end

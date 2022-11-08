@@ -35,6 +35,12 @@
 - Twitter: [@sharkleshevon](https://twitter.com/sharkleshevon)
 - LinkedIn: [Makoji David](https://linkedin.com/in/makoji-david)
 
+👤 **Betsegaw Sebsibe**
+
+- GitHub: [@Betse_s](https://github.com/betses)
+- Twitter: [@Betse_s](https://twitter.com/Betse_s)
+- LinkedIn: [Betsegaw Sebsibe](https://www.linkedin.com/in/betsegaw-sebsibe/)
+
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!

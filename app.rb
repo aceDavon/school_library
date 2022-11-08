@@ -20,17 +20,16 @@ class App
     if @books.empty?
       puts "There are no books created yet, Add some books to see them here :( \n\n"
     else
-      @books.each { |bk| puts "\n Title: #{bk["title"]} by #{bk["author"]} \n \n" }
+      @books.each { |bk| puts "\n Title: #{bk['title']} by #{bk['author']} \n \n" }
     end
   end
-
 
   def all_people
     @people = load_person
     if @people.empty?
       puts "There are no persons created yet, Add users to see them here :( \n\n"
     else
-      @people.each { |peeps| puts "\n Name: #{peeps["name"]}, Age: #{peeps["age"]} years old \n\n" }
+      @people.each { |peeps| puts "\n Name: #{peeps['name']}, Age: #{peeps['age']} years old \n\n" }
     end
   end
 
@@ -74,21 +73,12 @@ class App
     end
   end
 
-
   def create_book(title, author)
     new_book = Book.new(title, author)
-    @books << { title: new_book.title, author: new_book.author } 
+    @books << { title: new_book.title, author: new_book.author }
     puts "\n Book #{title} by #{author} created successfully \n\n"
     add_to_json(@books)
   end
-
-  # def add_to_json(books)
-  #   me = []
-  #   books.each do |s|
-  #     me << {"book title" => s.title, "author" => s.author}
-  #   end
-  #   File.write('me.json', JSON.generate(me))
-  # end
 
   def permission?
     puts 'Do you have Parent\'s Permission (Y,y/N,n)?'
@@ -106,21 +96,21 @@ class App
 
   def create_rental
     puts "Here are the available books, Select by Index number \n"
-    @books.each_with_index { |bk, i| puts "\n #{i + 1}. #{bk["title"]} by #{bk["author"]}  \n\n" }
+    @books.each_with_index { |bk, i| puts "\n #{i + 1}. #{bk['title']} by #{bk['author']}  \n\n" }
     index = gets.chomp.to_i
     puts 'Who is renting this book?'
-    @people.each_with_index { |bk, i| puts "#{i + 1} #{bk["name"]} aged #{bk["age"]}" }
+    @people.each_with_index { |bk, i| puts "#{i + 1} #{bk['name']} aged #{bk['age']}" }
     person = gets.chomp.to_i
     puts 'Enter a date'
-    puts  @books[index - 1]
+    puts @books[index - 1]
     date = gets.chomp
     new_rental = Rental.new(date, @books[index - 1], @people[person - 1])
     @rentals << {
       date: new_rental.date,
       person_id: new_rental.person['id'],
       person_name: new_rental.person['name'],
-      title: new_rental.book["title"],
-      author: new_rental.book["author"]
+      title: new_rental.book['title'],
+      author: new_rental.book['author']
     }
     puts "\n Rental Created successfully \n\n"
     save_rentals(@rentals)
@@ -129,14 +119,16 @@ class App
   def all_rentals
     @rentals = load_rentals
     puts "Below are the rentals Records, Insert an ID to filter \n"
-    @rentals.each_with_index { |rent, i| puts "\n #{i}. #{rent["title"]} written by #{rent["author"]} \n \n" }
+    @rentals.each_with_index { |rent, i| puts "\n #{i}. #{rent['title']} written by #{rent['author']} \n \n" }
     puts "Here are all users information \n"
-    @people.each_with_index { |users, i| puts "\n #{i + 1}. #{users["name"]} aged #{users["age"]} with ID: #{users["id"]} \n\n" }
+    @people.each_with_index do |users, i|
+      puts "\n #{i + 1}. #{users['name']} aged #{users['age']} with ID: #{users['id']} \n\n"
+    end
 
     puts 'Enter an ID to see all user\'s rentals'
     id = gets.chomp.to_i
     @rentals.select do |user|
-      puts "\n #{user["date"]} #{user["title"]} written by #{user["author"]} \n\n" if user["person_id"] == id
+      puts "\n #{user['date']} #{user['title']} written by #{user['author']} \n\n" if user['person_id'] == id
     end
   end
 end

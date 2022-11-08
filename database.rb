@@ -12,5 +12,4 @@ module Database
   def save_rentals(rentals)
     File.write('./data/rentals.json', JSON.generate(rentals))
   end
-  
 end
