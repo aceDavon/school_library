@@ -1,12 +1,9 @@
 require './app'
-# require './init'
 
 module Request
   def initialize
     @inst = App.new
   end
-
-  # include Init
 
   def request(selection)
     case selection

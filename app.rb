@@ -2,27 +2,36 @@ require './book'
 require './teacher'
 require './rental'
 require './student'
+require './database'
+require './loaddata'
+require 'json'
 
 class App
+  include Database
+  include Loaddata
   def initialize
-    @books = []
-    @people = []
-    @rentals = []
+    @books = load_book
+    @people = load_person
+    @rentals = load_rentals
   end
 
   def all_books
+    @books = load_book
     if @books.empty?
       puts "There are no books created yet, Add some books to see them here :( \n\n"
     else
-      @books.each { |bk| puts "\n Title: #{bk.title} by #{bk.author} \n \n" }
+      @books.each { |bk| puts "\n Title: #{bk['title']} by #{bk['author']} \n \n" }
     end
   end
 
   def all_people
+    @people = load_person
     if @people.empty?
       puts "There are no persons created yet, Add users to see them here :( \n\n"
     else
-      @people.each { |peeps| puts "\n Name: #{peeps.name}, Age: #{peeps.age} years old \n\n" }
+      @people.each do |peeps|
+        puts "\n [#{peeps['type']}]: Name: #{peeps['name']}, Age: #{peeps['age']} years old specialized in #{peeps['specialization']} \n\n"
+      end
     end
   end
 
@@ -38,8 +47,16 @@ class App
       puts 'What\'s teacher\'s specialization?'
       spec = gets.chomp
       new_person = Teacher.new(spec, name, age)
-      @people << new_person unless @people.include?(new_person)
+      @people << {
+        id: new_person.id,
+        type: new_person.class,
+        name: new_person.name,
+        age: new_person.age,
+        rentals: new_person.rentals,
+        specialization: new_person.specialization
+      }
       puts "\n User #{name} added successfully \n\n"
+      save_people(@people)
     when '2'
       puts 'Enter Student Name'
       name = gets.chomp
@@ -49,15 +66,22 @@ class App
       classes = gets.chomp
       permission?
       new_student = Student.new(classes, name, age)
-      @people << new_student unless @people.include?(new_student)
+      @people << {
+        id: new_student.id,
+        type: new_student.class,
+        name: new_student.name,
+        age: new_student.age
+      }
       puts "\n Student #{name} aged #{age} added successfully \n\n"
+      save_people(@people)
     end
   end
 
   def create_book(title, author)
     new_book = Book.new(title, author)
-    @books << new_book unless @books.include?(new_book)
+    @books << { title: new_book.title, author: new_book.author }
     puts "\n Book #{title} by #{author} created successfully \n\n"
+    add_to_json(@books)
   end
 
   def permission?
@@ -76,28 +100,41 @@ class App
 
   def create_rental
     puts "Here are the available books, Select by Index number \n"
-    @books.each_with_index { |bk, i| puts "\n #{i + 1}. #{bk.title} by #{bk.author}  \n\n" }
+    @books.each_with_index { |bk, i| puts "\n #{i + 1}. #{bk['title']} by #{bk['author']}  \n\n" }
     index = gets.chomp.to_i
     puts 'Who is renting this book?'
-    @people.each_with_index { |bk, i| puts "#{i + 1} #{bk.name} aged #{bk.age}" }
+    @people.each_with_index { |bk, i| puts "#{i + 1} #{bk['name']} aged #{bk['age']}" }
     person = gets.chomp.to_i
     puts 'Enter a date'
+    puts @books[index - 1]
     date = gets.chomp
     new_rental = Rental.new(date, @books[index - 1], @people[person - 1])
-    @rentals << new_rental unless @rentals.include?(new_rental)
+    arr = []
+    @rentals << {
+      date: new_rental.date,
+      person_id: new_rental.person['id'],
+      person_name: new_rental.person['name'],
+      title: new_rental.book['title'],
+      author: new_rental.book['author'],
+      rentals: arr << new_rental.person['rentals']
+    }
     puts "\n Rental Created successfully \n\n"
+    save_rentals(@rentals)
   end
 
   def all_rentals
+    @rentals = load_rentals
     puts "Below are the rentals Records, Insert an ID to filter \n"
-    @rentals.each_with_index { |rent, i| puts "\n #{i}. #{rent.book.title} written by #{rent.book.author} \n \n" }
+    @rentals.each_with_index { |rent, i| puts "\n #{i}. #{rent['title']} written by #{rent['author']} \n \n" }
     puts "Here are all users information \n"
-    @people.each_with_index { |users, i| puts "\n #{i + 1}. #{users.name} aged #{users.age} with ID: #{users.id} \n\n" }
+    @people.each_with_index do |users, i|
+      puts "\n #{i + 1}. #{users['name']} aged #{users['age']} with ID: #{users['id']} \n\n"
+    end
 
     puts 'Enter an ID to see all user\'s rentals'
     id = gets.chomp.to_i
     @rentals.select do |user|
-      puts "\n #{user.date} #{user.book.title} written by #{user.book.author} \n\n" if user.person.id == id
+      puts "\n #{user['date']} #{user['title']} written by #{user['author']} \n\n" if user['person_id'] == id
     end
   end
 end
