@@ -6,6 +6,7 @@ class Student < Person
   def initialize(classroom, name, age)
     super(name, age)
     @classroom = classroom
+    @classes = []
   end
 
   def play_hooky
@@ -14,6 +15,6 @@ class Student < Person
 
   def classrooms(classes)
     @classroom = classes
-    classes.students.push(self) unless classes.students.include(self)
+    classes.students.push(self) unless classes.students.include?(self)
   end
 end
